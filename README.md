@@ -75,9 +75,26 @@ with shared word lines, bit lines, search lines one match line per row (ML[0:7])
 ### Simulation Waveforms
 
 - Match line response for match operation
+  
+<p align="center">
+<img src="Images/matchline-correct-matchcase.png" width="600">
+</p>
+
 - Match line response for mismatch operation
+
+<p align="center">
+<img src="Images/Mismatch-matchlines.png" width="600">
+</p>
+
 - Total power consumption plots for match and mismatch cases
-- Search line waveforms for validation
+
+<p align="center">
+<img src="Images/match-correct-power.png" width="600">
+</p>
+<p align="center">
+<img src="Images/mismatch-power.png" width="600">
+</p>
+
 ## Conclusion
 
 This project presents a low-power 8×8 Dual-VT NOR-type Content Addressable Memory (CAM) implemented using UMC 65 nm CMOS technology in Cadence Virtuoso. By combining the Hybrid Self-Controlled Precharge-Free (HSCPF) architecture with a transistor-level Dual Threshold Voltage (Dual-VT) assignment strategy, the design effectively reduces both dynamic and static power consumption.
