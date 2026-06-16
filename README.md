@@ -38,5 +38,8 @@ Access transistors
 M1, M2 → LVT for faster write operation
 Search transistors
 M5, M6 → LVT for faster match-line evaluation
+<p align="center">
+  <img src="Images/8T CAM.png" width="600">
+</p>
 
 The architecture is integrated with the HSCPF CAM design, eliminating the conventional match-line precharge phase and reducing dynamic power consumption.
