@@ -1,20 +1,20 @@
 # Dual-VT based Content-Addressable-Memory Design for Low power Applications
 
 
-**OVERVIEW**
+# OVERVIEW
 
 This project presents a low-power 8×8 NOR-type Content Addressable Memory (CAM) architecture designed using UMC 65 nm CMOS technology in Cadence Virtuoso. The design combines the Hybrid Self-Controlled Precharge-Free (HSCPF) architecture with a Dual Threshold Voltage (Dual-VT) assignment strategy to reduce leakage power while maintaining high search speed.
 The main idea is:
 HVT transistors are assigned to the 6T SRAM cross-coupled inverters to suppress static leakage.
 LVT transistors are assigned to access and search transistors to achieve faster write and search operations.
 
-**OBJECTIVES**
+# OBJECTIVES
 1. Reduce static leakage power in CAM cells.
 2. Improve search speed without sacrificing performance.
 3. Optimize the Power-Delay Product (PDP).
 4. Develop an energy-efficient CAM architecture suitable for low-power VLSI applications.
 
-**INTRODUCTION**
+## INTRODUCTION
 
 Content Addressable Memory is a high-speed parallel search hardware that performs comparison between the input search data and the stored data and provides the address corresponding to the matched data [2]. Due to its high-speed search capability CAM is widely used in network routers,
 packet classification, image processing and many more. This high throughput parallel search mechanism comes with high power consumption due to the presence of large number of search line and match line circuitry that switch simultaneously during each search operation.
@@ -27,7 +27,7 @@ precharge free circuits to achieve good Power-Delay Product. However,these works
 
 Multi-threshold voltage design is a well-established technique in standard-cell synthesis, where a cell library offerstransistor of two or more threshold voltages. High-VT (HVT) cells reduce leakage at the cost of speed; Low-VT (LVT) cells provide speed at the cost of leakage. The central insight of the present work is that within a single CAM cell these two requirements that is the cross coupled inverter is a leakage critical block since its always ON while the access transistors and the search transistors are performance critical blocks. This observation motivates a within-cell Dual-VT assignment that applies HVT devices selectively to the latch inverters and LVT devices to the access and search transistors.
 
-**DESIGN METHODOLOGY**
+## DESIGN METHODOLOGY
 
 The proposed 8T CAM cell consists of:
 
@@ -43,3 +43,61 @@ M5, M6 → LVT for faster match-line evaluation
 </p>
 
 The architecture is integrated with the HSCPF CAM design, eliminating the conventional match-line precharge phase and reducing dynamic power consumption.
+
+# 8X8 CAM ARRAY WITH HSCPF ARCHITECTURE
+<p align="center">
+  <img src="Images/8x8 CAM Array.png" width="600">
+</p>
+An 8×8 CAM array was designed in Cadence Virtuoso using the UMC 65 nm pdk at VDD= 1.2V. The array comprises 64 dual-VT 8T cells arranged in 8 rows and 8 columns
+with shared word lines, bit lines, search lines one match line per row (ML[0:7]), they are designed following the HSCPF architecture.
+
+## Simulation Results
+
+| Metric | Proposed Dual-VT CAM |
+|---|---|
+| Technology | UMC 65 nm CMOS |
+| Supply Voltage | 1.2 V |
+| CAM Size | 8 × 8 |
+| Match Power | 0.100 mW |
+| Mismatch Power | 0.164 mW |
+| Search Delay | 48.8 ps |
+| Power-Delay Product (PDP) | 0.0763 fJ/bit/search |
+
+### Comparison with Existing CAM Architectures
+
+| Architecture | Power (mW) | Delay (ps) | PDP (fJ/bit/search) |
+|---|---:|---:|---:|
+| PF CAM | 0.220 | 283.2 | 0.973 |
+| SCPF CAM | 0.261 | 101.0 | 0.411 |
+| HSCPF CAM | 0.213 | 74.0 | 0.246 |
+| Proposed Dual-VT CAM | 0.100 | 48.8 | 0.0763 |
+
+### Simulation Waveforms
+
+- Match line response for match operation
+- Match line response for mismatch operation
+- Total power consumption plots for match and mismatch cases
+- Search line waveforms for validation
+## Conclusion
+
+This project presents a low-power 8×8 Dual-VT NOR-type Content Addressable Memory (CAM) implemented using UMC 65 nm CMOS technology in Cadence Virtuoso. By combining the Hybrid Self-Controlled Precharge-Free (HSCPF) architecture with a transistor-level Dual Threshold Voltage (Dual-VT) assignment strategy, the design effectively reduces both dynamic and static power consumption.
+
+The selective use of High-VT transistors in the SRAM latch minimizes leakage power, while Low-VT transistors in the access and search paths maintain high-speed operation. Simulation results demonstrate an average match power of 0.100 mW, a search delay of 48.8 ps, and a Power-Delay Product (PDP) of 0.0763 fJ/bit/search, achieving significant improvements over conventional PF, SCPF, and HSCPF CAM architectures.
+
+This work demonstrates that Dual-VT optimization is an effective and process-compatible approach for developing energy-efficient CAM architectures for future low-power VLSI applications.
+
+## Acknowledgement
+
+I would like to express their sincere gratitude to the Department of Micro and Nanoelectronics, Vellore Institute of Technology (VIT), Vellore, for providing the necessary resources and guidance to carry out this project. Also for all the researchers, faculties and students who had made contibutions to this area.
+
+## References
+
+1. M. Zackriya V and H. M. Kittur, “Precharge-free, low-power content-addressable memory,” *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 24, no. 8, pp. 2614–2621, Aug. 2016.
+
+2. K. Pagiamtzis and A. Sheikholeslami, “Content-addressable memory (CAM) circuits and architectures: A tutorial and survey,” *IEEE Journal of Solid-State Circuits*, vol. 41, no. 3, pp. 712–727, Mar. 2006.
+
+3. T. V. Mahendra, S. Mishra, and A. Dandapat, “Self-controlled high-performance precharge-free content-addressable memory,” *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 25, no. 8, pp. 2388–2392, Aug. 2017.
+
+4. V. V. S. Satti and S. Sriadibhatla, “Hybrid self-controlled precharge-free CAM design for low power and high performance,” *Turkish Journal of Electrical Engineering & Computer Sciences*, vol. 27, no. 2, pp. 1132–1146, 2019.
+
+5. Y. Arslan and K. Christensen, “Multi-threshold CMOS digital circuits: Managing leakage power,” *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 14, no. 7, pp. 721–729, Jul. 2006.
